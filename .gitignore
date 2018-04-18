@@ -42,6 +42,9 @@ typings/
 # Optional npm cache directory
 .npm
 
+# Yarn package manager
+yarn.lock
+
 # Optional eslint cache
 .eslintcache
 
@@ -57,3 +60,5 @@ typings/
 # dotenv environment variables file
 .env
 
+# compilation output
+packages/**/lib

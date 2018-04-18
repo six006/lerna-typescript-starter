@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "es2015",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "lib": ["dom", "es2015", "scripthost"],
+    "pretty": true,
+    "strictNullChecks": true,
+    "inlineSourceMap": true,
+    "declaration": true,
+    "experimentalDecorators": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true
+  }
+}
