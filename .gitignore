@@ -62,3 +62,4 @@ yarn.lock
 
 # compilation output
 packages/**/lib
+config/**/lib

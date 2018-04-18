@@ -1,5 +1,13 @@
 {
   "name": "@config/eslint",
   "version": "0.1.0",
-  "main": "./index.js"
+  "main": "./lib/index.js",
+  "types": "./lib/index.d.ts",
+  "devDependencies": {
+    "typescript": "2.7.2"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "test": "npm run build && ava"
+  }
 }
