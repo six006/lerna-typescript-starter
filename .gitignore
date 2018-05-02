@@ -63,3 +63,4 @@ yarn.lock
 # compilation output
 packages/**/lib
 config/**/lib
+.lerna_backup
