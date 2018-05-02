@@ -1,7 +1,7 @@
 # Lerna Typescript Starter
 An easy way to start into the world of Typescript and Monorepos!
 
-### Contents
+## Contents
 * Contains predefined lerna package areas `packages` and `config`.
 * Supports individual TSLint and Typescript Compiler settings for each package.
 * Built-in support for tests with [Ava](https://github.com/avajs/ava).
@@ -13,3 +13,24 @@ An easy way to start into the world of Typescript and Monorepos!
 ```sh
 git clone --depth=1 https://github.com/janbiasi/lerna-typescript-starter.git <my-project>
 ```
+
+## Adding custom configuration
+tbd.
+
+## Creating new packages
+tbd.
+
+## Writing tests
+tbd.
+
+### Browser tests with ava
+tbd.
+
+## Integrated CLI
+tbd.
+
+### Adding new commands
+tbd.
+
+### Adjusting templates
+tbd.
