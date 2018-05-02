@@ -1,13 +1,15 @@
 {
-  "name": "dictive",
+  "name": "your-project-name",
   "version": "0.1.0",
   "main": "./lib/module/index.js",
   "types": "./lib/types/index.d.ts",
+  "private": true,
   "scripts": {
     "c": "./node_modules/.bin/git-cz",
+    "cli": "node ./bin/cli",
     "postinstall": "npm run bootstrap",
     "bootstrap": "./node_modules/.bin/lerna bootstrap --hoist",
-    "lint": "./node_modules/.bin/tslint --project tsconfig.json",
+    "lint": "./node_modules/.bin/tslint --project ./config/typescript/tsconfig.json",
     "lint-check": "./node_modules/.bin/tslint-config-prettier-check ./tslint.json",
     "test": "./node_modules/.bin/lerna run test",
     "prebuild": "npm run clean",
@@ -16,13 +18,17 @@
   },
   "devDependencies": {
     "browser-env": "3.2.5",
-    "lerna": "^2.8.0",
+    "chalk": "2.4.1",
+    "commitizen": "2.9.6",
+    "cz-conventional-changelog": "2.1.0",
+    "figures": "2.0.0",
+    "lerna": "2.8.0",
+    "npm-run-all": "4.1.2",
     "rimraf": "2.6.2",
     "tslint": "5.9.1",
     "tslint-config-airbnb": "5.7.0",
     "tslint-config-prettier": "1.9.0",
-    "commitizen": "2.9.6",
-    "cz-conventional-changelog": "2.1.0"
+    "vorpal": "1.12.0"
   },
   "dependencies": {
     "typescript": "2.7.2",
