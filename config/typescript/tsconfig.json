@@ -3,7 +3,7 @@
   "compilerOptions": {
     "baseUrl": "./packages",
     "paths": {
-      "@dictive/*": ["./*/src"]
+      "@your-project-name/*": ["./*/src"]
     }
   }
 }
