@@ -6,14 +6,13 @@
   "private": true,
   "scripts": {
     "c": "./node_modules/.bin/git-cz",
-    "cli": "node ./bin/cli",
-    "postinstall": "./node_modules/.bin/run-s --print-label --print-name bootstrap",
+    "cli": "node ./bin/cli/start",
+    "postinstall": "./node_modules/.bin/run-s --print-name bootstrap",
     "bootstrap": "./node_modules/.bin/lerna bootstrap --hoist",
     "lint": "./node_modules/.bin/tslint --project ./config/typescript/tsconfig.json",
     "lint-check": "./node_modules/.bin/tslint-config-prettier-check ./tslint.json",
-    "pretest": "./node_modules/.bin/run-s --print-label --print-name build",
     "test": "./node_modules/.bin/lerna run test",
-    "prebuild": "./node_modules/.bin/run-s --print-label --print-name clean",
+    "prebuild": "./node_modules/.bin/run-s --print-name clean",
     "build": "./node_modules/.bin/lerna run build",
     "changelog": "./node_modules/.bin/conventional-changelog -p angular -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md && git commit -m \"chore(release): update changelog [auto]\"",
     "clean": "./node_modules/.bin/rimraf packages/**/lib && rimraf packages/**/src/*.d.ts",
@@ -47,7 +46,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-push": "./node_modules/.bin/run-s --print-label --print-name test changelog"
+      "pre-push": "./node_modules/.bin/run-s --print-name test changelog"
     }
   },
   "prettier": {
