@@ -1,4 +1,9 @@
 {
   "name": "@config/typescript",
-  "version": "0.1.0"
+  "version": "0.1.0",
+  "devDependencies": {
+    "tslint": "5.9.1",
+    "tslint-config-airbnb": "5.7.0",
+    "tslint-config-prettier": "1.9.0"
+  }
 }
