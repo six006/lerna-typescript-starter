@@ -8,10 +8,11 @@ An easy way to start into the world of Typescript and Monorepos!
 * Includes [Editor-](http://editorconfig.org) and [prettier](https://github.com/prettier/prettier/issues/13) configurations.
 * Automated node versioning supports [nvm](https://github.com/creationix/nvm) and [node-env](https://github.com/ekalinin/nodeenv).
 * Linting with [ESLint](https://eslint.org/) is already on board.
+* Integrated extensible CLI built on top of [vorpal](http://vorpal.js.org/).
 
 ### Create a project from this boilerplate
 ```sh
-git clone --depth=1 https://github.com/janbiasi/lerna-typescript-starter.git <my-project>
+git clone --depth=1 https://github.com/janbiasi/lerna-typescript-starter.git my-project
 ```
 
 ## Adding custom configuration
