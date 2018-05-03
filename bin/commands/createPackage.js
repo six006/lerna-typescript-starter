@@ -10,9 +10,8 @@ const pkg = require('../templates/package.json');
 const tsconfig = require('../templates/tsconfig.json');
 const tsconfigBuild = require('../templates/tsconfig.build.json');
 
-const getPackagePath = name => path.resolve(__dirname, '../../packages/', name);
-
-exports = module.exports = (packageName, commandFinished) => {
+exports = module.exports = (packageName, commandFinished, packageBaseLocation = 'packages') => {
+	const getPackagePath = name => path.resolve0(__dirname, `../../${packageBaseLocation}/`, name);
 	return new Promise((resolve, reject) => {
 		const name = `@${basePkg.name}/${name}`;
 		const targetPackagePath = getPackagePath(name);

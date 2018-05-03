@@ -23,7 +23,11 @@ vorpal.command('test', `Run tests for ${pkg.name}`).action((args, callback) => {
 });
 
 vorpal.command('create-package <name>', 'Create a new package').action((args, callback) => {
-	createPackage(args.name, callback);
+	createPackage(args.name, callback, 'packages');
+});
+
+vorpal.command('create-config <name>', ' Create a new configuration').action((args, callback) => {
+	createPackage(args.name, callback, 'config');
 });
 
 vorpal.delimiter(`${pkg.name}$`).show();
