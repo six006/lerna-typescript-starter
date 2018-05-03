@@ -2,7 +2,7 @@ const path = require('path');
 const basePkg = require('../../package.json');
 const createFile = require('../utils/createFile');
 const createFolder = require('../utils/createFolder');
-const logger = require('../utils/logger')('create-package');
+const logger = require('../../utils/logger')('create-package');
 
 // templates
 const index = require('../templates/index.js.json');

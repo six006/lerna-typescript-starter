@@ -7,7 +7,7 @@
   "scripts": {
     "c": "./node_modules/.bin/git-cz",
     "cli": "node ./bin/cli/start",
-    "postinstall": "./node_modules/.bin/run-s --print-name bootstrap",
+    "postinstall": "./node_modules/.bin/run-s --print-name bootstrap securityscan",
     "bootstrap": "./node_modules/.bin/lerna bootstrap --hoist",
     "lint": "./node_modules/.bin/tslint --project ./config/typescript/tsconfig.json",
     "lint-check": "./node_modules/.bin/tslint-config-prettier-check ./tslint.json",
@@ -15,7 +15,8 @@
     "prebuild": "./node_modules/.bin/run-s --print-name clean",
     "build": "./node_modules/.bin/lerna run build",
     "changelog": "./node_modules/.bin/conventional-changelog -p angular -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md && git commit -m \"chore(release): update changelog [auto]\"",
-    "clean": "./node_modules/.bin/rimraf packages/**/lib && rimraf packages/**/src/*.d.ts",
+    "clean": "node ./bin/tasks/clean",
+    "securityscan": "./node_modules/.bin/nsp check --reporter summary",
     "commitmsg": "commitlint -e $GIT_PARAMS"
   },
   "devDependencies": {
@@ -30,6 +31,8 @@
     "husky": "1.0.0-rc.2",
     "lerna": "2.8.0",
     "npm-run-all": "4.1.2",
+    "nsp": "3.2.1",
+    "nyc": "11.7.1",
     "rimraf": "2.6.2",
     "tslint": "5.9.1",
     "tslint-config-airbnb": "5.7.0",
