@@ -1,5 +1,5 @@
 const fs = require('fs');
-const hbs = require('handlebars');
+const handlebars = require('handlebars');
 
 exports = module.exports = (opts, data) => {
 	const { template, target } = opts;
@@ -10,7 +10,7 @@ exports = module.exports = (opts, data) => {
 				return reject(err);
 			}
 
-			const template = hbs.compile(templateContent.toString());
+			const template = handlebars.compile(templateContent.toString());
 			const contents = template(data);
 
 			fs.writeFile(target, contents, { encoding: 'utf8' }, err => {
