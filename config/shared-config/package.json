@@ -2,8 +2,7 @@
     "name": "@config/shared-config",
     "version": "0.1.0",
     "scripts": {
-        "build": "tsc -p tsconfig.build.json",
-        "test": "npm run build && ava"
+        "build": "tsc -p tsconfig.build.json"
     },
     "main": "./lib/index.js",
     "types": "./lib/index.d.ts",
