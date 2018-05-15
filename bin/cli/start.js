@@ -23,6 +23,8 @@ const defaultRunnerOptions = {
 	printName: true,
 };
 
+// command definitions below
+
 vorpal.command('test', `Run tests for ${pkg.name}`).action((args, callback) => {
 	logger.info(`preparing test run in ${chalk.magenta(lernaConfig.packages.join(', '))}`);
 	runAll(['test'], defaultRunnerOptions)
@@ -43,4 +45,6 @@ vorpal.command('create-config <name>', ' Create a new configuration').action((ar
 	createPackage(commandOptions)(args.name, callback, 'config');
 });
 
-vorpal.delimiter(`${pkg.name}$`).show();
+// show cli
+
+vorpal.delimiter(`${package.name}$`).show();
