@@ -3,6 +3,7 @@
 const vorpal = require('vorpal')();
 const runAll = require('npm-run-all');
 const pkg = require('../package.json');
+const logger = require('./utils/logger')('cli');
 
 // commands
 const createPackage = require('./commands/createPackage');
@@ -23,6 +24,7 @@ vorpal.command('test', `Run tests for ${pkg.name}`).action((args, callback) => {
 });
 
 vorpal.command('create-package <name>', 'Create a new package').action((args, callback) => {
+	logger.log(`use package name  ${args.name}`);
 	createPackage(args.name, callback);
 });
 

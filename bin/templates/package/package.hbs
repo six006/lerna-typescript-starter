@@ -1,5 +1,5 @@
 {
-    "name": "@lerna-typescript-starter/common",
+    "name": "@{{project.name}}/{{pkg.name}}",
     "version": "0.1.0",
     "scripts": {
         "build": "tsc -p tsconfig.build.json",
@@ -12,6 +12,7 @@
         "typescript": "2.7.2"
     },
     "ava": {
-        "require": ["../../test/helper/setupBrowserEnv.js"]
+        "require": ["../../test/helper/setupBrowserEnv.js"],
+        "snapshotDir": "{{pkg.scope}}/{{pkg.name}}/snapshots"
     }
 }
