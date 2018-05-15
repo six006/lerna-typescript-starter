@@ -19,7 +19,7 @@ exports = module.exports = commandOptions => {
 			const name = `@${basePkg.name}/${packageName}`;
 			const targetPackagePath = getPackagePath(packageName);
 			const configPackagePath = getPackagePath('config');
-			const relativeTsSettingsPath = path.relative(targetPackagePath, configPackagePath);
+			const relativeTsSettingsPath = path.relative(targetPackagePath, configPackagePath) + '/..';
 
 			logger.info(`creating package under ${getLogPath(targetPackagePath)}`);
 
@@ -75,10 +75,10 @@ exports = module.exports = commandOptions => {
 						.then(() => {
 							copyTemplate({
 								template: getTemplatePath('src/index'),
-								target: path.join(packageSourcePath, '/index.js'),
+								target: path.join(packageSourcePath, '/index.ts'),
 							})
 								.then(() => {
-									logger.success('src/index.js created');
+									logger.success('src/index.ts created');
 									commandFinished();
 								})
 								.catch(e => {

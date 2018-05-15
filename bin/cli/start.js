@@ -29,9 +29,23 @@ vorpal.command('test', `Run tests for ${pkg.name}`).action((args, callback) => {
 	logger.info(`preparing test run in ${chalk.magenta(lernaConfig.packages.join(', '))}`);
 	runAll(['test'], defaultRunnerOptions)
 		.then(() => {
+			logger.success('tests processed');
 			callback();
 		})
 		.catch(err => {
+			logger.error('some tests failed');
+			callback(err);
+		});
+});
+
+vorpal.command('build', `Build all packages in ${pkg.name}`).action((args, callback) => {
+	runAll(['build'], defaultRunnerOptions)
+		.then(() => {
+			logger.success('building packages succeeded');
+			callback();
+		})
+		.catch(() => {
+			logger.error('building packages failed');
 			callback(err);
 		});
 });
