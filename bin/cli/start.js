@@ -47,4 +47,4 @@ vorpal.command('create-config <name>', ' Create a new configuration').action((ar
 
 // show cli
 
-vorpal.delimiter(`${package.name}$`).show();
+vorpal.delimiter(`${pkg.name}$`).show();
