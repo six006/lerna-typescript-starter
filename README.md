@@ -28,13 +28,39 @@ git clone --depth=1 https://github.com/janbiasi/lerna-typescript-starter.git my-
 * `clean`, deletes the compiled output from all packages
 
 ## Adding custom configuration
-tbd.
+You can edit all baseconfigurations regarding ESLint and Typescript under the `config` folder under the root. If you want to adjust single packages you can do this allso by editing the `tsconfig.json`, `tsconfig.compiler.json` or the ` .eslintrc.js` file.
+
+If you add another framework or want to add a global configuration for your library just use the **create-config** command from the integrated [CLI](#integrated-cli):
+
+```bash
+$ npm run cli
+$ your-project$ create-config core-config
+ › use package name core-config [cli]
+ ℹ creating package under ~/config/core-config [command:create-package]
+ ✔ package.json created [command:create-package]
+ ✔ tsconfig.build.json created [command:create-package]
+ ✔ tsconfig.json created [command:create-package]
+ ✔ src/index.js created [command:create-package]
+```
 
 ## Creating new packages
-tbd.
+
+You can easily create new packages and/or configs with the [CLI](#integrated-cli) by using the `create-package` command. Take a look at the example below:
+
+```bash
+$ npm run cli
+$ your-project$ create-package my-new-package
+ › use package name my-new-package [cli]
+ ℹ creating package under ~/packages/my-new-package [command:create-package]
+ ✔ package.json created [command:create-package]
+ ✔ tsconfig.build.json created [command:create-package]
+ ✔ tsconfig.json created [command:create-package]
+ ✔ src/index.js created [command:create-package]
+```
 
 ## Writing tests
-tbd.
+
+There's built in support for ava, which means you can write tests out of the box by creating `.test.ts` files. Attention: you need to precompile the tests to work with ava, this will be automatically done by the provided `test` command.
 
 ### Browser tests with ava
 tbd.
