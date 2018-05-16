@@ -1,5 +1,5 @@
 <a name="0.1.0"></a>
-# 0.1.0 (2018-05-15)
+# 0.1.0 (2018-05-16)
 
 
 ### Bug Fixes
@@ -15,6 +15,7 @@
 
 * **cli:** add basic cli functionality ([17f9f25](https://github.com/janbiasi/lerna-typescript-starter/commit/17f9f25))
 * **cli:** adding new clean command ([cab4a59](https://github.com/janbiasi/lerna-typescript-starter/commit/cab4a59))
+* **cli:** adding new update task ([071608e](https://github.com/janbiasi/lerna-typescript-starter/commit/071608e))
 * **cli:** implement default package links ([f0183e4](https://github.com/janbiasi/lerna-typescript-starter/commit/f0183e4))
 * **cli:** use handlebars templates ([dcc95f6](https://github.com/janbiasi/lerna-typescript-starter/commit/dcc95f6))
 * **config:** enable ts support for configs ([3b1f45e](https://github.com/janbiasi/lerna-typescript-starter/commit/3b1f45e))
