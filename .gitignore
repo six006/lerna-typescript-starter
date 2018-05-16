@@ -60,6 +60,9 @@ yarn.lock
 # dotenv environment variables file
 .env
 
+# update process
+.update/
+
 # compilation output
 packages/**/lib
 config/**/lib

@@ -11,6 +11,7 @@ const lernaConfig = require('../../lerna.json');
 // commands
 const rootPath = path.join(__dirname, '..', '..');
 const createPackage = require('./commands/createPackage');
+const update = require('./commands/update');
 
 // settings for each cli command
 const commandOptions = {
@@ -58,6 +59,13 @@ vorpal.command('create-package <name>', 'Create a new package').action((args, ca
 vorpal.command('create-config <name>', ' Create a new configuration').action((args, callback) => {
 	createPackage(commandOptions)(args.name, callback, 'config');
 });
+
+vorpal
+	.command('update', 'Updates the base repository structure')
+	.option('-s, --save', 'Do not override files, instead clone via renaming to *.update.*')
+	.action((args, callback) => {
+		update(commandOptions)(Boolean(args.options.save));
+	});
 
 // show cli
 
