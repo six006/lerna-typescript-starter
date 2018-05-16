@@ -4,6 +4,10 @@
   "main": "./lib/module/index.js",
   "types": "./lib/types/index.d.ts",
   "private": true,
+  "engines": {
+    "node": ">= 8.0.0",
+    "npm": ">= 5.0.0"
+  },
   "scripts": {
     "c": "./node_modules/.bin/git-cz",
     "cli": "node ./bin/cli/start",
@@ -43,6 +47,9 @@
   },
   "dependencies": {
     "typescript": "2.7.2"
+  },
+  "lerna-typescript-starter": {
+    "repository": "https://github.com/janbiasi/lerna-typescript-starter.git"
   },
   "config": {
     "commitizen": {
