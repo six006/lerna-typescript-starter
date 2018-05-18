@@ -84,7 +84,6 @@ exports = module.exports = commandOptions => {
 							task: (ctx, task) => {
 								return Promise.all(
 									ctx.paths.shallowUpdate.map(shallowUpdatePath => {
-										console.log(shallowUpdatePath);
 										return execa('mv', [
 											shallowUpdatePath,
 											shallowUpdatePath.replace(TEMP_UPDATE_LOC, ROOT_PATH),
@@ -105,8 +104,8 @@ exports = module.exports = commandOptions => {
 						targetPath += '.update';
 
 						return {
-							title: `migrate ${packagePath}`,
-							task: () => execa('mv', packagePath, targetPath),
+							title: `migrate deps from ${packagePath}`,
+							task: () => execa('mv', ['-f', packagePath, targetPath]),
 						};
 					});
 
