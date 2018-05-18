@@ -105,11 +105,11 @@ exports = module.exports = commandOptions => {
 
 						return {
 							title: `migrate ${packagePath}`,
-							task: () => execa('mv', packagePath, targetPath);
-						}
+							task: () => execa('mv', packagePath, targetPath),
+						};
 					});
 
-					return new Listr(updateTasks)
+					return new Listr(updateTasks);
 				},
 			},
 		]);
