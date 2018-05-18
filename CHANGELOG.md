@@ -5,6 +5,7 @@
 ### Bug Fixes
 
 * **cli:** fix minor issues from the CLI ([c6c5f59](https://github.com/janbiasi/lerna-typescript-starter/commit/c6c5f59))
+* **cli:** fix typo shallow update ([928b946](https://github.com/janbiasi/lerna-typescript-starter/commit/928b946))
 * **cli:** fix upgrade task ressources (pkg) ([580f25a](https://github.com/janbiasi/lerna-typescript-starter/commit/580f25a))
 * **cli:** prevent from crashing because of undefined variable ([3ed40cd](https://github.com/janbiasi/lerna-typescript-starter/commit/3ed40cd))
 * **common:** fix broken config paths ([1d32782](https://github.com/janbiasi/lerna-typescript-starter/commit/1d32782))
