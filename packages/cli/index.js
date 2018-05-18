@@ -2,16 +2,19 @@
 
 const path = require('path');
 const chalk = require('chalk');
+const execa = require('execa');
 const vorpal = require('vorpal')();
 const runAll = require('npm-run-all');
 const pkg = require('../../package.json');
-const logger = require('../utils/logger')('cli');
+const createFile = require('./utils/createFile');
+const logger = require('./utils/logger')('cli');
 const lernaConfig = require('../../lerna.json');
 
 // commands
 const rootPath = path.join(__dirname, '..', '..');
 const createPackage = require('./commands/createPackage');
-const update = require('./commands/update');
+const updateProject = require('./commands/updateProject');
+const detachCLI = require('./commands/detachCLI');
 
 // settings for each cli command
 const commandOptions = {
@@ -25,6 +28,24 @@ const defaultRunnerOptions = {
 };
 
 // command definitions below
+vorpal.command('detach', `Remove the CLI from the project`).action((args, callback) => {
+	const cliPackagePath = 'packages/cli';
+	const basePackagePath = path.join(rootPath, 'package.json');
+	const basePackage = require(basePackagePath);
+
+	logger.log(`update project configuration ...`);
+	basePackage['lerna-typescript-starter'].ignore.push(cliPackagePath);
+	createFile(path.join(rootPath, 'package.json'), JSON.stringify(basePackage));
+
+	logger.log(`removing CLI package from project ...`);
+	execa('rm', ['-rf', path.join(rootPath, cliPackagePath)])
+		.then(() => {
+			logger.success('CLI successfully detached');
+		})
+		.catch(err => {
+			logger.error(`could not detach CLI: ${err}`);
+		});
+});
 
 vorpal.command('test', `Run tests for ${pkg.name}`).action((args, callback) => {
 	logger.info(`preparing test run in ${chalk.magenta(lernaConfig.packages.join(', '))}`);
@@ -64,7 +85,7 @@ vorpal
 	.command('update', 'Updates the base repository structure')
 	.option('-s, --save', 'Do not override files, instead clone via renaming to *.update.*')
 	.action((args, callback) => {
-		update(commandOptions)(Boolean(args.options.save));
+		updateProject(commandOptions)(Boolean(args.options.save));
 	});
 
 // show cli

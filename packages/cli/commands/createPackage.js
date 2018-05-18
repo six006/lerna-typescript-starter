@@ -1,8 +1,8 @@
 const path = require('path');
 const basePkg = require('../../../package.json');
-const createFolder = require('../../utils/createFolder');
-const copyTemplate = require('../../utils/copyTemplate');
-const logger = require('../../utils/logger')('command:create-package');
+const createFolder = require('../utils/createFolder');
+const copyTemplate = require('../utils/copyTemplate');
+const logger = require('../utils/logger')('command:create-package');
 
 const getLogPath = targetPath => targetPath.replace(path.join(__dirname, '../../..'), '~');
 const getTemplatePath = packagePath => {
@@ -16,7 +16,6 @@ exports = module.exports = commandOptions => {
 		const getPackagePath = name => path.resolve(rootPath, packageBaseLocation, name);
 
 		return new Promise((resolve, reject) => {
-			const name = `@${basePkg.name}/${packageName}`;
 			const targetPackagePath = getPackagePath(packageName);
 			const configPackagePath = getPackagePath('config');
 			const relativeTsSettingsPath = path.relative(targetPackagePath, configPackagePath) + '/..';

@@ -10,7 +10,7 @@
   },
   "scripts": {
     "c": "./node_modules/.bin/git-cz",
-    "cli": "node ./bin/cli/start",
+    "cli": "node ./packages/cli/index",
     "postinstall": "./node_modules/.bin/run-s --print-name bootstrap securityscan",
     "bootstrap": "./node_modules/.bin/lerna bootstrap --hoist",
     "lint": "./node_modules/.bin/tslint --project ./config/typescript/tsconfig.json",
@@ -49,7 +49,8 @@
     "typescript": "2.7.2"
   },
   "lerna-typescript-starter": {
-    "repository": "https://github.com/janbiasi/lerna-typescript-starter.git"
+    "repository": "https://github.com/janbiasi/lerna-typescript-starter.git",
+    "ignore": []
   },
   "config": {
     "commitizen": {
