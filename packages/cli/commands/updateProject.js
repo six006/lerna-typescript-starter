@@ -96,7 +96,7 @@ exports = module.exports = commandOptions => {
 				},
 			},
 			{
-				title: 'Dependency updates',
+				title: 'Adding package.json.update files',
 				task: () => {
 					const newPackagePaths = globby.sync(dependencyUpdateFiles);
 					const updateTasks = newPackagePaths.map(packagePath => {
@@ -111,6 +111,14 @@ exports = module.exports = commandOptions => {
 
 					return new Listr(updateTasks);
 				},
+			},
+			{
+				title: 'Teardown of unused update files',
+				task: () =>
+					Promise.all([
+						// currently only one task, prepare for more ...
+						execa('rm', ['-rf', TEMP_UPDATE_LOC]),
+					]),
 			},
 		]);
 

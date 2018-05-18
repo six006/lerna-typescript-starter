@@ -48,6 +48,10 @@ typings/
 # Yarn package manager
 yarn.lock
 
+# CLI update files
+.update/
+*.json.update
+
 # Optional eslint cache
 .eslintcache
 
@@ -62,9 +66,6 @@ yarn.lock
 
 # dotenv environment variables file
 .env
-
-# update process
-.update/
 
 # compilation output
 packages/**/lib
