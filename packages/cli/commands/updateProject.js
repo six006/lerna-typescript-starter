@@ -85,8 +85,9 @@ exports = module.exports = commandOptions => {
 								return Promise.all(
 									ctx.paths.shallowUpdate.map(shallowUpdatePath => {
 										return execa('mv', [
-											ressourceUpdatePath,
-											ressourceUpdatePath.replace(TEMP_UPDATE_LOC, ROOT_PATH),
+											'-fi',
+											shallowUpdatePath,
+											shallowUpdatePath.replace(TEMP_UPDATE_LOC, ROOT_PATH),
 										]);
 									})
 								);
