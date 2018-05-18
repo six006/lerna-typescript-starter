@@ -32,11 +32,11 @@ exports = module.exports = commandOptions => {
 	return (preventOverride = false) => {
 		const tasks = new Listr([
 			{
-				title: 'Prepare',
+				title: 'Prepare for the update process',
 				task: () => {
 					return new Listr([
 						{
-							title: 'clean update directory',
+							title: 'Clean update directory',
 							task: () => {
 								return new Promise((resolve, reject) => {
 									rimraf(TEMP_UPDATE_LOC, err => {
@@ -61,11 +61,11 @@ exports = module.exports = commandOptions => {
 				task: () => execa('git', ['clone', '--depth=1', REMOTE_REPO_PATH, TEMP_UPDATE_LOC]),
 			},
 			{
-				title: 'Shallow update',
+				title: 'Upgrading from lerna-typescript-starter',
 				task: () => {
 					return new Listr([
 						{
-							title: 'find possible updates',
+							title: 'Looking for possible updates',
 							task: (ctx, task) => {
 								ctx.paths = {
 									shallowUpdate: [],
@@ -80,12 +80,12 @@ exports = module.exports = commandOptions => {
 							},
 						},
 						{
-							title: 'copy core updates',
+							title: 'Copy core updates from remote',
 							task: (ctx, task) => {
 								return Promise.all(
 									ctx.paths.shallowUpdate.map(shallowUpdatePath => {
+										console.log(shallowUpdatePath);
 										return execa('mv', [
-											'-fi',
 											shallowUpdatePath,
 											shallowUpdatePath.replace(TEMP_UPDATE_LOC, ROOT_PATH),
 										]);
