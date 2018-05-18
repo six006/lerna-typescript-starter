@@ -4,6 +4,7 @@
 
 ### Bug Fixes
 
+* **cli:** add teardown and ignores ([7bec669](https://github.com/janbiasi/lerna-typescript-starter/commit/7bec669))
 * **cli:** fix migration subtasks ([47b52a7](https://github.com/janbiasi/lerna-typescript-starter/commit/47b52a7))
 * **cli:** fix minor issues from the CLI ([c6c5f59](https://github.com/janbiasi/lerna-typescript-starter/commit/c6c5f59))
 * **cli:** fix mv command execution ([51f7b0f](https://github.com/janbiasi/lerna-typescript-starter/commit/51f7b0f))
