@@ -62,9 +62,7 @@
     }
   },
   "husky": {
-    "hooks": {
-      "pre-push": "./node_modules/.bin/run-s --print-name test changelog"
-    }
+    "hooks": {}
   },
   "prettier": {
     "useTabs": true,
