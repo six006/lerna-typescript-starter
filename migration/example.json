@@ -1,0 +1,8 @@
+{
+	"target": "some-new-package",
+	"source": "/Users/jbiasi/Projects/GitHub/lerna-typescript-starter/packages/cli/test/to-migrate/",
+	"pattern": "**/*.{js,json}",
+	"ignore": [
+		"*.invalid.js"
+	]
+}

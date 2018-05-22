@@ -15,10 +15,12 @@ const rootPath = path.join(__dirname, '..', '..');
 const createPackage = require('./commands/createPackage');
 const updateProject = require('./commands/updateProject');
 const detachCLI = require('./commands/detachCLI');
+const migrateFromJS = require('./commands/migrateFromJS');
 
 // settings for each cli command
 const commandOptions = {
 	rootPath,
+	settings: pkg['lerna-typescript-starter'] || {},
 };
 
 // runner settings for bash
@@ -72,13 +74,23 @@ vorpal.command('build', `Build all packages in ${pkg.name}`).action((args, callb
 		});
 });
 
+vorpal.command('migrate', `Migrate JavaScript libraries to a TypeScript package`).action((args, callback) => {
+	migrateFromJS(commandOptions)()
+		.then(callback)
+		.catch(callback);
+});
+
 vorpal.command('create-package <name>', 'Create a new package').action((args, callback) => {
 	logger.log(`use package name ${chalk.magenta(args.name)}`);
-	createPackage(commandOptions)(args.name, callback, 'packages');
+	createPackage(commandOptions)(args.name, 'packages')
+		.then(callback)
+		.catch(callback);
 });
 
 vorpal.command('create-config <name>', ' Create a new configuration').action((args, callback) => {
-	createPackage(commandOptions)(args.name, callback, 'config');
+	createPackage(commandOptions)(args.name, 'config')
+		.then(callback)
+		.catch(callback);
 });
 
 vorpal

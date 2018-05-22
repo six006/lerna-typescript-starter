@@ -1,4 +1,6 @@
 const path = require('path');
+const execa = require('execa');
+const Listr = require('listr');
 const basePkg = require('../../../package.json');
 const createFolder = require('../utils/createFolder');
 const copyTemplate = require('../utils/copyTemplate');
@@ -12,83 +14,118 @@ const getTemplatePath = packagePath => {
 exports = module.exports = commandOptions => {
 	const { rootPath } = commandOptions;
 
-	return (packageName, commandFinished, packageBaseLocation = 'packages') => {
+	return (packageName, packageBaseLocation = 'packages', opts) => {
+		const { supportBrowserEnv } = opts;
 		const getPackagePath = name => path.resolve(rootPath, packageBaseLocation, name);
 
 		return new Promise((resolve, reject) => {
 			const targetPackagePath = getPackagePath(packageName);
 			const configPackagePath = getPackagePath('config');
+			const packageSourcePath = path.join(targetPackagePath, 'src');
 			const relativeTsSettingsPath = path.relative(targetPackagePath, configPackagePath) + '/..';
 
-			logger.info(`creating package under ${getLogPath(targetPackagePath)}`);
-
-			createFolder(targetPackagePath)
-				.then(() => {
-					copyTemplate(
-						{ template: getTemplatePath('package'), target: path.join(targetPackagePath, 'package.json') },
-						{
-							project: {
-								name: basePkg.name,
+			const tasks = new Listr([
+				{
+					title: `Create new package folder for ${packageName}`,
+					task: () => createFolder(targetPackagePath),
+				},
+				{
+					title: 'Initializing contents from boilerplate',
+					task: () => {
+						return new Listr([
+							{
+								title: 'Creating package.json',
+								task: () =>
+									copyTemplate(
+										{
+											template: getTemplatePath('package'),
+											target: path.join(targetPackagePath, 'package.json'),
+										},
+										{
+											supportBrowserEnv: !!supportBrowserEnv,
+											project: {
+												name: basePkg.name,
+											},
+											pkg: {
+												location: packageBaseLocation,
+												name: packageName,
+											},
+										}
+									),
 							},
-							pkg: {
-								location: packageBaseLocation,
-								name: packageName,
+							{
+								title: 'Creating TypeScript configuration',
+								task: () =>
+									copyTemplate(
+										{
+											template: getTemplatePath('tsconfig'),
+											target: path.join(targetPackagePath, 'tsconfig.json'),
+										},
+										{ relativeTsSettingsPath }
+									),
 							},
-						}
-					)
-						.then(() => logger.success('package.json created'))
-						.catch(e => {
-							logger.error(e);
-						});
-				})
-				.then(() => {
-					copyTemplate(
-						{
-							template: getTemplatePath('tsconfig'),
-							target: path.join(targetPackagePath, 'tsconfig.json'),
-						},
-						{ relativeTsSettingsPath }
-					)
-						.then(() => logger.success('tsconfig.json created'))
-						.catch(e => {
-							logger.error(e);
-						});
-				})
-				.then(() => {
-					copyTemplate(
-						{
-							template: getTemplatePath('tsconfig.build'),
-							target: path.join(targetPackagePath, 'tsconfig.build.json'),
-						},
-						{ relativeTsSettingsPath }
-					)
-						.then(() => logger.success('tsconfig.build.json created'))
-						.catch(e => {
-							logger.error(e);
-						});
-				})
-				.then(() => {
-					const packageSourcePath = path.join(targetPackagePath, 'src');
+							{
+								title: 'Creating compiler configuration',
+								task: () =>
+									copyTemplate(
+										{
+											template: getTemplatePath('tsconfig.compiler'),
+											target: path.join(targetPackagePath, 'tsconfig.compiler.json'),
+										},
+										{ relativeTsSettingsPath }
+									),
+							},
+							{
+								title: 'Creating source folder',
+								task: () => createFolder(packageSourcePath),
+							},
+							{
+								title: 'Creating library index',
+								task: () =>
+									copyTemplate({
+										template: getTemplatePath('src/index'),
+										target: path.join(packageSourcePath, '/index.ts'),
+									}),
+							},
+							{
+								title: 'Adding support for browser environment',
+								enabled: () => !!supportBrowserEnv,
+								task: () => {
+									return new Listr([
+										{
+											title: 'Creating test utils folder',
+											task: () => createFolder(path.join(packageSourcePath, 'test')),
+										},
+										{
+											title: 'Copying browser environement setup script',
+											task: () =>
+												copyTemplate({
+													template: getTemplatePath('src/test/setupTests'),
+													target: path.join(packageSourcePath, 'test/setupTests.js'),
+												}),
+										},
+									]);
+								},
+							},
+							{
+								title: 'Bootstrapping lerna packages',
+								task: (ctx, task) => {
+									if (commandOptions.skipBootstrap) {
+										return task.skip('Skipping bootstrap process by configuration');
+									}
 
-					createFolder(packageSourcePath)
-						.then(() => {
-							copyTemplate({
-								template: getTemplatePath('src/index'),
-								target: path.join(packageSourcePath, '/index.ts'),
-							})
-								.then(() => {
-									logger.success('src/index.ts created');
-									commandFinished();
-								})
-								.catch(e => {
-									logger.error(e);
-								});
-						})
-						.catch(e => {
-							logger.error(e);
-						});
-				})
-				.catch(e => logger.error(e));
+									return execa('npm', ['run', 'bootstrap']);
+								},
+							},
+						]);
+					},
+				},
+			]);
+
+			tasks
+				.run()
+				.then(resolve)
+				.catch(reject);
 		});
 	};
 };

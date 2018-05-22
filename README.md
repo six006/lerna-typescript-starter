@@ -34,13 +34,7 @@ If you add another framework or want to add a global configuration for your libr
 
 ```bash
 $ npm run cli
-$ your-project$ create-config core-config
- › use package name core-config [cli]
- ℹ creating package under ~/config/core-config [command:create-package]
- ✔ package.json created [command:create-package]
- ✔ tsconfig.build.json created [command:create-package]
- ✔ tsconfig.json created [command:create-package]
- ✔ src/index.js created [command:create-package]
+your-project$ create-config core-config
 ```
 
 ## Creating new packages
@@ -49,13 +43,20 @@ You can easily create new packages and/or configs with the [CLI](#integrated-cli
 
 ```bash
 $ npm run cli
-$ your-project$ create-package my-new-package
- › use package name my-new-package [cli]
- ℹ creating package under ~/packages/my-new-package [command:create-package]
- ✔ package.json created [command:create-package]
- ✔ tsconfig.build.json created [command:create-package]
- ✔ tsconfig.json created [command:create-package]
- ✔ src/index.js created [command:create-package]
+your-project$ create-package my-new-package
+```
+
+### Migrating packages from a JavaScript base
+tbd.
+
+```json
+{
+	"target": "some-new-package",
+	"source": "/project-xy/library/a/**/*.{js}",
+	"ignore": [
+		"*.invalid.js"
+	]
+}
 ```
 
 ## Writing tests
