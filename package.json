@@ -21,7 +21,6 @@
     "changelog": "./node_modules/.bin/conventional-changelog -p angular -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md && git commit -m \"chore(release): update changelog [auto]\"",
     "clean": "node ./bin/tasks/clean",
     "securityscan": "./node_modules/.bin/nsp check --reporter summary",
-    "commitmsg": "commitlint -e $GIT_PARAMS",
     "prerelease": "./node_modules/.bin/lerna-semantic-release pre",
     "release": "./node_modules/.bin/lerna-semantic-release perform",
     "postrelease": "./node_modules/.bin/lerna-semantic-release post"
@@ -62,7 +61,9 @@
     }
   },
   "husky": {
-    "hooks": {}
+    "hooks": {
+      "commit-msg": "commitlint -e $GIT_PARAMS"
+    }
   },
   "prettier": {
     "useTabs": true,
