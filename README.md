@@ -46,17 +46,35 @@ $ npm run cli
 your-project$ create-package my-new-package
 ```
 
+### Adjusting templates
+If you want to adjust the templates of the package blueprint you can head over to `packages/cli/templates` and adjust the right handlebars files.
+
 ### Migrating packages from a JavaScript base
-tbd.
+
+The integrated CLI includes the capability to migrate whole JavaScript into a new lerna package. Note that the JavaScript files will only be renamed to `.ts` and won't be transpiled to TypeScript - this has to be done manually atm. Migrations need a configuration file which looks like the example below.
 
 ```json
 {
 	"target": "some-new-package",
-	"source": "/project-xy/library/a/**/*.{js}",
+	"source": "/some-project/library/xy/",
+	"pattern": "**/*.{js,json,hbs}",
 	"ignore": [
-		"*.invalid.js"
+        "*.invalid.js",
+        "*.update.*"
 	]
 }
+```
+
+Per default, migrations are stored under `/migration`, but the path can be changed to any other path. Make sure you update the path to the migration configurations in your `package.json` under `lerna-typescript-starter.migrations.config` that the CLI is able to read the configurations.
+
+To process the migration, you only have to run `npm run cli` and use the command `migrate`. The interface will ask you which migration you want to process and if the package needs support for the browser environement.
+
+```bash
+$ npm run cli # start cli
+your-project$ migrate # run command
+? Select a migration configuration file (Use arrow keys) # select the file
+> /example.json
+? Does the package use the browser environment? (y/N) # add browser support
 ```
 
 ## Writing tests
@@ -64,13 +82,11 @@ tbd.
 There's built in support for ava, which means you can write tests out of the box by creating `.test.ts` files. Attention: you need to precompile the tests to work with ava, this will be automatically done by the provided `test` command.
 
 ### Browser tests with ava
-tbd.
 
-## Integrated CLI
-tbd.
+Check the [Setting up AVA for browser testing](https://github.com/avajs/ava/blob/master/docs/recipes/browser-testing.md) guide from the AVA team.
 
-### Adding new commands
-tbd.
 
-### Adjusting templates
-tbd.
+## Update the project structure
+There's also a built in command for updating the repository structure and core files. Package configurations will be pulled out as `package.json.update`, so you'll see if there are new dependencies which are compatible with the setup.
+
+> **Important note:** The updates of dependencies should also be automated inside the update process in the near future.
