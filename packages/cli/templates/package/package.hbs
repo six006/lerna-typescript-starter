@@ -8,11 +8,13 @@
     "main": "./lib/index.js",
     "types": "./lib/index.d.ts",
 	"dependencies": {
+		"@config/typescript": "0.1.0",
 		"@config/shared-config": "0.1.0"
 	},
     "devDependencies": {
         "ava": "0.25.0",
-        "typescript": "2.7.2"
+        "typescript": "2.7.2"{{#if supportBrowserEnv}},{{/if}}
+		{{#if supportBrowserEnv}}"browser-env": "3.7.1"{{/if}}
     },
     "ava": {
         "require": ["../../test/helper/setupBrowserEnv.js"],
