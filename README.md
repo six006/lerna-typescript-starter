@@ -39,11 +39,11 @@ your-project$ create-config core-config
 
 ## Creating new packages
 
-You can easily create new packages and/or configs with the [CLI](#integrated-cli) by using the `create-package` command. Take a look at the example below:
+You can easily create new packages and/or configs with the [CLI](#integrated-cli) by using the `create-package` command. To automatically add support for browser testing with the `browser-env` and automated integration into AVA please pass the `--browser` or `-b` option.
 
 ```bash
 $ npm run cli
-your-project$ create-package my-new-package
+your-project$ create-package my-new-package [--browser]
 ```
 
 ### Adjusting templates
