@@ -6,6 +6,7 @@ const globby = require('globby');
 const rimraf = require('rimraf');
 const chproc = require('child_process');
 const basePkg = require('../../../package.json');
+const wait = require('../utils/wait');
 const createFolder = require('../utils/createFolder');
 const { getLoggableFilePath } = require('../utils/format');
 const logger = require('../utils/logger')('command:update');
@@ -83,12 +84,14 @@ exports = module.exports = commandOptions => {
 							title: 'Copy core updates from remote',
 							task: (ctx, task) => {
 								return Promise.all(
-									ctx.paths.shallowUpdate.map(shallowUpdatePath => {
-										return execa('mv', [
-											shallowUpdatePath,
-											shallowUpdatePath.replace(TEMP_UPDATE_LOC, ROOT_PATH),
-										]);
-									})
+									[wait(1000)].concat(
+										ctx.paths.shallowUpdate.map(shallowUpdatePath => {
+											return execa('mv', [
+												shallowUpdatePath,
+												shallowUpdatePath.replace(TEMP_UPDATE_LOC, ROOT_PATH),
+											]);
+										})
+									)
 								);
 							},
 						},
@@ -117,11 +120,15 @@ exports = module.exports = commandOptions => {
 				task: () =>
 					Promise.all([
 						// currently only one task, prepare for more ...
+						wait(1000),
 						execa('rm', ['-rf', TEMP_UPDATE_LOC]),
 					]),
 			},
 		]);
 
-		return tasks.run();
+		return tasks
+			.run()
+			.then(resolve)
+			.catch(reject);
 	};
 };

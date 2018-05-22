@@ -14,7 +14,7 @@ const getTemplatePath = packagePath => {
 exports = module.exports = commandOptions => {
 	const { rootPath } = commandOptions;
 
-	return (packageName, packageBaseLocation = 'packages', opts) => {
+	return (packageName, packageBaseLocation = 'packages', opts = {}) => {
 		const { supportBrowserEnv } = opts;
 		const getPackagePath = name => path.resolve(rootPath, packageBaseLocation, name);
 
@@ -100,8 +100,8 @@ exports = module.exports = commandOptions => {
 											title: 'Copying browser environement setup script',
 											task: () =>
 												copyTemplate({
-													template: getTemplatePath('src/test/setupTests'),
-													target: path.join(packageSourcePath, 'test/setupTests.js'),
+													template: getTemplatePath('src/test/setupBrowserEnv'),
+													target: path.join(packageSourcePath, 'test/setupBrowserEnv.ts'),
 												}),
 										},
 									]);

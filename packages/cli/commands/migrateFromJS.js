@@ -140,7 +140,10 @@ exports = module.exports = commandOptions => {
 						},
 					]);
 
-					return tasks.run();
+					return tasks
+						.run()
+						.then(resolve)
+						.catch(reject);
 				});
 		});
 	};

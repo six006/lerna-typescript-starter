@@ -80,12 +80,17 @@ vorpal.command('migrate', `Migrate JavaScript libraries to a TypeScript package`
 		.catch(callback);
 });
 
-vorpal.command('create-package <name>', 'Create a new package').action((args, callback) => {
-	logger.log(`use package name ${chalk.magenta(args.name)}`);
-	createPackage(commandOptions)(args.name, 'packages')
-		.then(callback)
-		.catch(callback);
-});
+vorpal
+	.command('create-package <name>', 'Create a new package')
+	.option('-b, --browser', 'Setup the package as browser package')
+	.action((args, callback) => {
+		logger.log(`use package name ${chalk.magenta(args.name)}`);
+		createPackage(commandOptions)(args.name, 'packages', {
+			supportBrowserEnv: args.options.browser,
+		})
+			.then(callback)
+			.catch(callback);
+	});
 
 vorpal.command('create-config <name>', ' Create a new configuration').action((args, callback) => {
 	createPackage(commandOptions)(args.name, 'config')
