@@ -2,7 +2,8 @@
     "name": "@{{project.name}}/{{pkg.name}}",
     "version": "0.1.0",
     "scripts": {
-        "build": "tsc -p tsconfig.build.json",
+        "build": "tsc -p tsconfig.compiler.json",
+		"watch": "tsc -p tsconfig.compiler.json --watch",
         "test": "npm run build && ava"
     },
     "main": "./lib/index.js",
@@ -21,8 +22,8 @@
     },{{/if}}
     {{#if supportBrowserEnv}}"ava": {
         "require": ["./lib/test/setupBrowserEnv.js"],
-        "snapshotDir": "{{pkg.location}}/{{pkg.name}}/snapshots"
+        "snapshotDir": "./snapshots"
     }{{else}}"ava": {
-        "snapshotDir": "{{pkg.location}}/{{pkg.name}}/snapshots"
+        "snapshotDir": "./snapshots"
     }{{/if}}
 }
